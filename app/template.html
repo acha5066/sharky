@@ -1,0 +1,12 @@
+<form action="">
+    {{name}}
+    <input type="text" [(ngModel)]="name" name="name">
+    {{selectedShark}}
+    <select name="shark" [ngModel]="selectedShark" (ngModelChange)="onSharkSelect($event)">
+        <option *ngFor="let shark of sharks" [value]="shark">{{shark}}</option>
+    </select>
+    <select name="state" [ngModel]="selectedState" (ngModelChange)="onStateSelect($event)">
+        <option *ngFor="let state of states" [value]="state">{{state}}</option>
+    </select>
+</form>
+
