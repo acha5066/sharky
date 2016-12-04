@@ -77,18 +77,10 @@ export class Dorsal  {
     ); 
   }
 
-  getSharks(selectedState: string):Observable<Response> {
+  getSharks(body: any):Observable<Response> {
     let headers = new Headers();
     headers = this.createAuthorizationHeader(headers);
-    let body = {
-      "approved": true,
-      "state": selectedState,
-      "country": "Australia",
-      "timeRange":0,
-      "pageIndex": 0,
-      "pageSize": 10,
-      "publicKey": this.sensitive.getToken()
-    }
+    body['publicKey'] = this.sensitive.getToken();
     return this.http.post('http://api.dorsalwatch.com/public/report/list', body).map(
       response => response.json()
     ); 

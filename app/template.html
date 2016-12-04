@@ -9,7 +9,14 @@
         <option *ngFor="let state of states" [value]="state">{{state}}</option>
     </select>
     <select name="zone" [ngModel]="selectedZone" (ngModelChange)="onZoneSelect($event)">
-        <option *ngFor="let zone of zones" [value]="zone">{{zone.name}}</option>
+        <option *ngFor="let zone of zones" [value]="zone">{{zone}}</option>
     </select>
 </form>
 
+<div class="bar-graph">
+    <ng-container *ngFor="let report of dummyData" >
+        <div [ngStyle]="{'height': calculatePercentageHeight(report.value)}"class="bar-graph__bar">
+            {{report.value}}
+        </div>
+    </ng-container>
+</div>  
