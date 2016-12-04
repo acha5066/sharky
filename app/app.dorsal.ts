@@ -51,6 +51,23 @@ export class Dorsal  {
     headers.append('publicKey', this.sensitive.getToken()); 
     return headers;
   }
+  
+  getZones(country: string, state: string):Observable<Response> {
+    let headers = new Headers();
+    headers = this.createAuthorizationHeader(headers);
+    return this.http.get('http://api.dorsalwatch.com/public/surfspot/zone/' + country + '/' + state + '/' + this.sensitive.getToken()).map(
+      response => response.json()
+    ); 
+  }
+
+  getLocations(country: string, state: string, zone: string):Observable<Response> {
+    let headers = new Headers();
+    headers = this.createAuthorizationHeader(headers);
+    return this.http.get('http://api.dorsalwatch.com/public/surfspot/location/' + country + '/' + state + '/' + zone + '/' + this.sensitive.getToken()).map(
+      response => response.json()
+    ); 
+  }
+
 
   getStates():Observable<Response> {
     let headers = new Headers();
@@ -70,7 +87,7 @@ export class Dorsal  {
       "timeRange":0,
       "pageIndex": 0,
       "pageSize": 10,
-      "publicKey": this.getToken()
+      "publicKey": this.sensitive.getToken()
     }
     return this.http.post('http://api.dorsalwatch.com/public/report/list', body).map(
       response => response.json()

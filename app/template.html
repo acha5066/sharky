@@ -8,5 +8,8 @@
     <select name="state" [ngModel]="selectedState" (ngModelChange)="onStateSelect($event)">
         <option *ngFor="let state of states" [value]="state">{{state}}</option>
     </select>
+    <select name="zone" [ngModel]="selectedZone" (ngModelChange)="onZoneSelect($event)">
+        <option *ngFor="let zone of zones" [value]="zone">{{zone.name}}</option>
+    </select>
 </form>
 
