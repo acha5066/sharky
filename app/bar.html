@@ -1,4 +1,10 @@
 <div class="bar-graph">
+    <div class="axis axis__x">
+        {{xAxisLabel}}
+    </div>
+    <div class="axis axis__y">
+        {{yAxisLabel}}
+    </div>
     <ng-container *ngFor="let report of dummyData" >
         <div [ngStyle]="{'height': math.calculatePercentageHeight(report.value, highestVal)}" class="bar-graph__bar">
             {{report.value}}

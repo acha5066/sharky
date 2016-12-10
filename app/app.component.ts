@@ -64,6 +64,10 @@ export class AppComponent  {
 
   private helpers: HelpersService;
 
+  private xAxisLabel: string = 'Sharks';
+  
+  private yAxisLabel: string = 'Sightings'; 
+
   constructor(dorsal: Dorsal, helpers: HelpersService) {
     this.sharks = ['bull', 'white', 'tiger'];
     this.dorsal = dorsal;
