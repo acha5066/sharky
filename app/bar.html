@@ -1,0 +1,7 @@
+<div class="bar-graph">
+    <ng-container *ngFor="let report of dummyData" >
+        <div [ngStyle]="{'height': math.calculatePercentageHeight(report.value, highestVal)}" class="bar-graph__bar">
+            {{report.value}}
+        </div>
+    </ng-container>
+</div>  

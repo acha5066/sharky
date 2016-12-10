@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
 import { Dorsal, Response, Report } from './app.dorsal';
 import { Sensitive } from './app.private';
+import { HelpersService} from './helpers.service';
 
 @Component({
   selector: 'my-app',
   templateUrl: 'app/template.html',
   providers: [Dorsal, Sensitive],
-  styles: [
-    '.bar-graph__bar {flex-grow: 1; background-color: grey; color: white; margin: 0 5px;}',
-    '.bar-graph__bar:hover {background-color: green}',
-    '.bar-graph {align-items: flex-end; display: flex; justify-content: space-between; border-bottom: 1px solid black; border-left: 1px solid black; height: 500px}',
-  ]
 })
 export class AppComponent  { 
 
@@ -34,7 +30,7 @@ export class AppComponent  {
 
   private reports: Array<any>;
 
-  private highestVal: number;
+  private scale: number = 24;
 
   private dummyData: Array<any> = [
     {value: 1},
@@ -66,43 +62,17 @@ export class AppComponent  {
     {value: 2}
   ];
 
-  constructor(dorsal: Dorsal) {
+  private helpers: HelpersService;
+
+  constructor(dorsal: Dorsal, helpers: HelpersService) {
     this.sharks = ['bull', 'white', 'tiger'];
     this.dorsal = dorsal;
+    this.helpers = helpers;
     dorsal.getStates().subscribe(
       response => {
         this.states = response.responseData;
       }
     )
-    let values = this.getValueOfKeysFromArrayOfObjects(this.dummyData, 'value');
-    this.highestVal = this.calculateHighest(values);
-  }
-
-  /**
-   * calculate the percentage of a value compared to the highest
-   * value. 
-   */
-  calculatePercentageHeight(value: number) {
-    return (value / this.highestVal) * 100 + '%';
-  }
-
-  /**
-   * Use this method when you want to create a new array of values from a specfic key of
-   * an array of objects 
-   */
-  getValueOfKeysFromArrayOfObjects(arrayOfObjects: Array<any>, key: string):Array<any> {
-    let values: Array<number> = [];
-    values = arrayOfObjects.map((value, index) => {
-      return value[key];
-    });
-    return values;
-  }
-
-  /**
-   * Calculate the highest value in an array.
-   */
-  calculateHighest(values: Array<number>):number {
-    return Math.max.apply(null, values);
   }
 
   keys(object: any) {
@@ -140,6 +110,7 @@ export class AppComponent  {
         this.dorsal.getSharks(body).subscribe(
           (response) => {
             this.reports = response.responseData;
+            console.log(this.helpers.roundToNearestHour(this.reports[1].reportTime));
             console.log(response.responseData);
           }
         ) 
