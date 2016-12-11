@@ -33,33 +33,11 @@ export class AppComponent  {
   private scale: number = 24;
 
   private dummyData: Array<any> = [
-    {value: 1},
-    {value: 1},
-    {value: 2},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 0},
-    {value: 4},
-    {value: 5},
-    {value: 6},
-    {value: 9},
-    {value: 12},
-    {value: 4},
-    {value: 2},
-    {value: 3},
-    {value: 1},
-    {value: 4},
-    {value: 5},
-    {value: 3},
-    {value: 2},
-    {value: 5},
-    {value: 2}
+    {label: 'white', value: 1},
+    {label: 'bull', value: 1},
+    {label: 'tiger', value: 2},
+    {label: 'hammer', value: 0},
+    {label: 'wobby', value: 0}
   ];
 
   private helpers: HelpersService;
